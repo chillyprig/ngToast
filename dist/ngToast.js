@@ -28,7 +28,8 @@
           horizontalPosition: 'right', // right, center, left
           verticalPosition: 'top', // top, bottom,
           maxNumber: 0,
-          newestOnTop: true
+          newestOnTop: true,
+          close_from_click: false
         };
 
         function Message(msg) {
@@ -255,12 +256,15 @@
 
             if (scope.message.dismissOnClick) {
               element.bind('click', function() {
+                scope.message.close_from_click = true;
+                  console.log(scope.message);
                 ngToast.dismiss(scope.message.id);
                 scope.$apply();
               });
             }
 
             if (scope.message.onDismiss) {
+                console.log(scope.message);
               scope.$on('$destroy',
                 scope.message.onDismiss.bind(scope.message));
             }
